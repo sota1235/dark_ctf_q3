@@ -1,4 +1,6 @@
 {
   "name": "sota1235/dark_ctf_q3",
-  "require": {}
+  "require": {
+    "slim/slim": "^3.0"
+  }
 }
