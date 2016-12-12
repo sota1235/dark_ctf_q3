@@ -1,6 +1,7 @@
 {
   "name": "sota1235/dark_ctf_q3",
   "require": {
-    "slim/slim": "^3.0"
+    "slim/slim": "^3.0",
+    "slim/twig-view": "^2.1"
   }
 }
