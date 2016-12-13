@@ -1,0 +1,10 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+  <h1>Welcome to flag page!</h1>
+  {% if isAdmin %}
+    <p>Flag is {{ flag }}</p>
+  {% else %}
+    <p>Admin user can get the flag.</p>
+  {% endif %}
+{% endblock %}
