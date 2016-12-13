@@ -6,7 +6,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use \Slim\View\Twig;
+use \Slim\Views\Twig;
 
 require 'vendor/autoload.php';
 
@@ -27,12 +27,9 @@ $container['view'] = function ($container) {
 };
 
 /** Routing */
-$app->get('/hello/{name}', function (Request $request, Response $response) {
-    $name = $request->getAttribute('name');
-    $response->getBody()->write("Hello, $name");
-
-    return $response;
-});
+$app->get('/login', function (Request $request, Response $response) {
+    return $this->view->render($response, 'index.html.twig');
+})->setName('login');
 
 /** Run app */
 $app->run();
