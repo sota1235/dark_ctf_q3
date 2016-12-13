@@ -26,6 +26,10 @@ $container['view'] = function ($container) {
     return $view;
 };
 
+$container['session'] = function ($container) {
+    return new \SlimSession\Helper;
+};
+
 /** Routing */
 $app->get('/login', function (Request $request, Response $response) {
     return $this->view->render($response, 'login.html.twig');
