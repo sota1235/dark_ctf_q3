@@ -28,7 +28,7 @@ $container['view'] = function ($container) {
 
 /** Routing */
 $app->get('/login', function (Request $request, Response $response) {
-    return $this->view->render($response, 'index.html.twig');
+    return $this->view->render($response, 'login.html.twig');
 })->setName('login');
 
 /** Run app */
