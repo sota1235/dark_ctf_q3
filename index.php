@@ -11,6 +11,11 @@ use \Slim\Views\Twig;
 require 'vendor/autoload.php';
 
 $app = new \Slim\App;
+$app->add(new \Slim\Middleware\Session([
+    'name'        => 'dark_ctf_session',
+    'autorefresh' => false,
+    'lifetime'    => '1 hour',
+]));
 $container = $app->getContainer();
 
 /** Container Config */
