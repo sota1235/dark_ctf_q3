@@ -1,13 +1,32 @@
 {% extends "layout.html.twig" %}
 
+{% block addCss %}
+<style>
+.textfield input {
+  width: 30%;
+}
+
+.warning {
+  color: #e80000;
+  padding-bottom: 0px;
+}
+</style>
+{% endblock %}
+
 {% block body %}
   <h1>We want git master!</h1>
   {% if errorMessage %}
-    <p>Login failed - {{ errorMessage }}</p>
+    <p class="warning">Login failed - {{ errorMessage }}</p>
   {% endif %}
   <form method="post" action="/login">
-    <input type="text" value="USERNAME" name="id">
-    <input type="password" value="PASSWORD" name="password">
+    <label class="textfield">
+      <input type="text" name="id">
+      <span class="textfield__label">Username</span>
+    </label>
+    <label class="textfield">
+      <input type="password" name="password">
+      <span class="textfield__label">Password</span>
+    </label>
     <input type="submit" value="LOGIN">
   </form>
 {% endblock %}
