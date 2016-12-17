@@ -37,6 +37,26 @@ $container['session'] = function ($container) {
     return new \SlimSession\Helper;
 };
 
+/** Middlewares */
+
+/** @var Closure */
+$authMiddleware = function ($request, $response, $next) use ($container) {
+    $session = $container['session'];
+
+    $userInfo = $session->get(LOGIN_SESSINO_KEY);
+
+    // Redirect to login page.
+    if (is_null($userInfo)) {
+        return $response->withRedirect(
+            $request->getUri()->withPath(
+                $this->router->pathFor('login.get')
+            ), 302
+        );
+    }
+
+    return $next($request, $response);
+};
+
 /** Routing */
 $app->get('/login', function (Request $request, Response $response) {
     return $this->view->render($response, 'login.html.twig');
@@ -64,7 +84,7 @@ $app->post('/login', function (Request $request, Response $response) {
 
 $app->get('/', function (Request $request, Response $response) {
     return $this->view->render($response, 'index.html.twig');
-})->setName('main.get');
+})->setName('main.get')->add($authMiddleware);
 
 /** Run app */
 $app->run();
