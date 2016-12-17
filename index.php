@@ -10,6 +10,10 @@ use \Slim\Views\Twig;
 
 require 'vendor/autoload.php';
 
+// Load Environment values
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 /** Constants */
 const LOGIN_SESSINO_KEY = 'LOGIN_SESSINO_KEY';
 
@@ -118,7 +122,7 @@ $app->get('/', function (Request $request, Response $response) {
 
     return $this->view->render($response, 'index.html.twig', [
         'isAdmin' => $userSession['admin'],
-        'flag'    => '', // TODO
+        'flag'    => getenv('DARK_CTF_Q3_FLAG'),
     ]);
 })->setName('main.get')->add($authMiddleware);
 
