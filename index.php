@@ -13,6 +13,16 @@ require 'vendor/autoload.php';
 /** Constants */
 const LOGIN_SESSINO_KEY = 'LOGIN_SESSINO_KEY';
 
+/** @var Array - Login user list. */
+$LOGIN_USERS = [
+    'subaru'     => '1amNeet!',
+    'emilia'     => '0tank07su',
+    'rem'        => 'morn1ngStar',
+    'ram'        => 'fuka4!mo',
+    'petelgeuse' => 'ta1da-death',
+    'admin'      => getenv('DARK_CTF_Q3_ADMIN_PASS'),
+];
+
 /** Initialization */
 $app = new \Slim\App;
 $app->add(new \Slim\Middleware\Session([
@@ -67,8 +77,19 @@ $app->post('/login', function (Request $request, Response $response) {
 
     $id       = $parsedBody['id'];
     $password = $parsedBody['password'];
+    global $LOGIN_USERS;
 
-    // TODO: Authenticate
+    if (!isset($LOGIN_USERS[$id])) {
+        return $this->view->render($response, 'login.html.twig', [
+            'errorMessage' => 'User '.$id.' not found.',
+        ]);
+    }
+
+    if ($LOGIN_USERS[$id] !== $password) {
+        return $this->view->render($response, 'login.html.twig', [
+            'errorMessage' => 'Wrong password.',
+        ]);
+    }
 
     $this->session->set(LOGIN_SESSINO_KEY, [
         'login' => true,
