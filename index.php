@@ -72,7 +72,7 @@ $app->post('/login', function (Request $request, Response $response) {
 
     $this->session->set(LOGIN_SESSINO_KEY, [
         'login' => true,
-        'admin' => true,
+        'admin' => ($id === 'admin'),
     ]);
 
     return $response->withRedirect(
