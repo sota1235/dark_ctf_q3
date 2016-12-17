@@ -83,7 +83,12 @@ $app->post('/login', function (Request $request, Response $response) {
 })->setName('login.post');
 
 $app->get('/', function (Request $request, Response $response) {
-    return $this->view->render($response, 'index.html.twig');
+    $userSession = $this->session->get(LOGIN_SESSINO_KEY);
+
+    return $this->view->render($response, 'index.html.twig', [
+        'isAdmin' => $userSession['admin'],
+        'flag'    => '', // TODO
+    ]);
 })->setName('main.get')->add($authMiddleware);
 
 /** Run app */
