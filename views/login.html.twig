@@ -1,10 +1,13 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
-<h1>We want git master!</h1>
-<form method="post" action="/login">
-  <input type="text" value="USERNAME" name="id">
-  <input type="password" value="PASSWORD" name="password">
-  <input type="submit" value="LOGIN">
-</form>
+  <h1>We want git master!</h1>
+  {% if errorMessage %}
+    <p>Login failed - {{ errorMessage }}</p>
+  {% endif %}
+  <form method="post" action="/login">
+    <input type="text" value="USERNAME" name="id">
+    <input type="password" value="PASSWORD" name="password">
+    <input type="submit" value="LOGIN">
+  </form>
 {% endblock %}
