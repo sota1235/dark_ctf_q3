@@ -82,6 +82,16 @@ $app->post('/login', function (Request $request, Response $response) {
     );
 })->setName('login.post');
 
+$app->post('/logout', function (Request $request, Response $response) {
+    $this->session->set(LOGIN_SESSINO_KEY, null);
+
+    return $response->withRedirect(
+        $request->getUri()->withPath(
+            $this->router->pathFor('login.get')
+        ), 302
+    );
+})->setName('logout.post');
+
 $app->get('/', function (Request $request, Response $response) {
     $userSession = $this->session->get(LOGIN_SESSINO_KEY);
 
