@@ -1,6 +1,10 @@
 Dark CTF Admin
 ====
 
+**注意： このアプリケーショには脆弱性が含まれています。**
+
+**Notice: This application is vulnerable.**
+
 Admin tool to manage the flags.
 
 ### Description
